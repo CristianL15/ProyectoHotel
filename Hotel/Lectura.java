@@ -1,50 +1,100 @@
-package com.example;
+package Hotel;
 import java.util.Scanner;
 
 public class Lectura {
-    Scanner sc = new Scanner(System.in);
-    
-    public int leerInt(String mensaje){
-        System.out.println(mensaje+": ");
-        int dato = sc.nextInt();
-        return dato;
-    }
+    Scanner input = new Scanner(System.in);
 
-    public String leerString(String mensaje){
+    public String readString(String mensaje){
         System.out.println(mensaje+ ": ");
-        sc.nextLine();
-        String dato = sc.next();
+        String dato = input.next();
+        input.nextLine();
         return dato;
     }
 
-    public int validarInt() {
-        if (sc.hasNextInt()) {
-            int numero = sc.nextInt();
-            if (numero > 0) {
-                return numero;
+    public String readLongString(String mensaje){
+        input.reset();
+        System.out.print(mensaje+ ": ");
+        String dato = input.nextLine();
+        return dato;
+    }
+
+    public int validateInt() {
+        if (input.hasNextInt()) {
+            int number = input.nextInt();
+            if (number > 0) {
+                return number;
             } else {
                 System.out.println("El número debe ser positivo");
                 return 0;
             }
         } else {
             System.out.println("Debe ser un entero positivo.");
-            sc.next();
+            input.next();
             return 0;
         }
     }
 
-    public int repetirLectura(String mensaje){
-        int numero = 0;
+    public int repeatIntValidity(String mensaje){
+        int number = 0;
         do {
             System.out.print(mensaje+ ": ");
-            numero = validarInt();
-        } while (numero == 0);
-        return numero;
+            number = validateInt();
+        } while (number == 0);
+        return number;
     }
 
-    public double leerDouble(String mensaje){
-        System.out.println(mensaje);
-        double dato = sc.nextDouble();
+    public double validateDouble() {
+        if (input.hasNextDouble()) {
+            double number = input.nextDouble();
+            if (number > 0) {
+                return number;
+            } else {
+                System.out.println("El número debe ser positivo");
+                return 0;
+            }
+        } else {
+            System.out.println("Debe ser un entero positivo.");
+            input.next();
+            return 0;
+        }
+    }
+
+    public double repeatDoubleValidity(String mensaje){
+        double number = 0;
+        do {
+            System.out.print(mensaje+ ": ");
+            number = validateDouble();
+        } while (number == 0);
+        return number;
+    }
+
+    public long validateLong() {
+        if (input.hasNextLong()) {
+            long number = input.nextLong();
+            if (number > 0) {
+                return number;
+            } else {
+                System.out.println("El número debe ser positivo");
+                return 0;
+            }
+        } else {
+            System.out.println("Debe ser un entero positivo.");
+            input.next();
+            return 0;
+        }
+    }
+
+    public long repeatLongValidity(String mensaje){
+        long number = 0;
+        do {
+            System.out.print(mensaje+ ": ");
+            number = validateLong();
+        } while (number == 0);
+        return number;
+    }
+
+    public String readChar(String mensaje){
+        String dato = input.next().toUpperCase().substring(0, 1);
         return dato;
     }
 }

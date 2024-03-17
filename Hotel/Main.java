@@ -1,10 +1,14 @@
-package com.example;
+package Hotel;
 
 public class Main{
 	public static void main(String[] args) {
-		// System.out.println("Bienvenido al hotel de comida");
-		// Chef chef = new Chef("Jhoan", 1, "french");
-		// Guest guest1 = new Guest("Juan", 4);
-		// chef.TakeOrders(guest1.getName(), guest1.orderFood());
+		Hotel hotel = new Hotel("Casa Blanca", "Londres, Inglaterra, BakerStreet, 221B");
+		System.out.println("Bienvenido(a) al hotel " + hotel.getName() + ". Aquí serás una especie de Dios y podrás actuar como cualquier persona dentro del hotel");
+		// Update update = new Update();
+		// update.start();
+		int i = 3;
+		while (i > 0){
+			hotel.selectRoomType();
+		}
 	}
 }
