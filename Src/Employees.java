@@ -1,19 +1,20 @@
-package Hotel;
+package Src;
 
 public class Employees {
   private String name;
   private long id;
   private long phoneNo;
   private String location;
-  private long salary;
-  private String role;
+  private double salary;
+  private Hotel hotel;
 
-  public Employees(String name, long id, long phoneNo, String location, long salary, String role) {
+  public Employees(String name, long id, long phoneNo, String location, double salary, Hotel hotel) {
     this.name = name;
     this.id = id;
     this.phoneNo = phoneNo;
     this.location = location;
     this.salary = salary;
+    this.hotel = hotel;
   }
 
   public String getName() {
@@ -48,20 +49,12 @@ public class Employees {
     this.location = location;
   }
 
-  public long getSalary() {
+  public double getSalary() {
     return salary;
   }
 
   public void setSalary(long salary) {
     this.salary = salary;
-  }
-
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
   }
 
   @Override

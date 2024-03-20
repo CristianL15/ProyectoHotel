@@ -1,6 +1,5 @@
-package Hotel;
+package Src;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class Menu {
     private String name;
@@ -12,7 +11,9 @@ public class Menu {
 
     public void removeFoodItem(int id) {
         FoodItem item = menu.stream().filter(foodItem -> foodItem.getId() == id).findFirst().orElse(null);
-        menu.remove(item);
+        if (item != null) {
+            menu.remove(item);
+        }
     }
 
     public void showMenu() {

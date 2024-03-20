@@ -1,4 +1,4 @@
-package Hotel;
+package Src;
 
 public class FoodItem{
 	private String name;

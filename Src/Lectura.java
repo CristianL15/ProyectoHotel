@@ -1,18 +1,16 @@
-package Hotel;
+package Src;
 import java.util.Scanner;
 
 public class Lectura {
     Scanner input = new Scanner(System.in);
 
     public String readString(String mensaje){
-        System.out.println(mensaje+ ": ");
+        System.out.print(mensaje+ ": ");
         String dato = input.next();
-        input.nextLine();
         return dato;
     }
 
     public String readLongString(String mensaje){
-        input.reset();
         System.out.print(mensaje+ ": ");
         String dato = input.nextLine();
         return dato;
@@ -40,6 +38,7 @@ public class Lectura {
             System.out.print(mensaje+ ": ");
             number = validateInt();
         } while (number == 0);
+        input.nextLine();
         return number;
     }
 
@@ -60,6 +59,7 @@ public class Lectura {
     }
 
     public double repeatDoubleValidity(String mensaje){
+        input.nextLine();
         double number = 0;
         do {
             System.out.print(mensaje+ ": ");

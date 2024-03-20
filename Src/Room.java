@@ -1,20 +1,19 @@
-package Hotel;
+package Src;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Room {
+  static int count = 1;
   private int id;
   private double price;
   private String type;
-  private Guest[] guestsInRoom;
-  private boolean available = true;
+  private ArrayList<Guest> guestsInRoom;
   private boolean clean = true;
 
-  public Room(int id, double price, String type, Guest[] guestsInRoom) {
-    this.id = id;
+  public Room(double price, String type) {
+    this.id = count++;
     this.price = price;
     this.type = type;
-    this.guestsInRoom = guestsInRoom;
   }
 
   public int getId() {
@@ -33,11 +32,11 @@ public class Room {
     this.price = price;
   }
 
-  public Guest[] getGuestsInRoom() {
+  public ArrayList<Guest> getGuestsInRoom() {
     return guestsInRoom;
   }
 
-  public void setGuestsRoom(Guest[] guestsInRoom) {
+  public void setGuestsRoom(ArrayList<Guest> guestsInRoom) {
     this.guestsInRoom = guestsInRoom;
   }
 
@@ -49,10 +48,18 @@ public class Room {
     this.type = type;
   }
 
+  public boolean isClean() {
+    return clean;
+  }
+
+  public void setClean(boolean clean) {
+    this.clean = clean;
+  }
+
   @Override
   public String toString() {
-    return "Room [id=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + Arrays.toString(guestsInRoom)
-        + "]";
+    return "Room [id=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + ", clean=" + clean + "]";
   }
+
   
 }
