@@ -2,13 +2,14 @@ package Src;
 
 public class Employees {
   private String name;
-  private long id;
-  private long phoneNo;
+  private String id;
+  private String phoneNo;
   private String location;
   private double salary;
   private Hotel hotel;
+  private boolean working = true;
 
-  public Employees(String name, long id, long phoneNo, String location, double salary, Hotel hotel) {
+  public Employees(String name, String id, String phoneNo, String location, double salary, Hotel hotel) {
     this.name = name;
     this.id = id;
     this.phoneNo = phoneNo;
@@ -25,19 +26,19 @@ public class Employees {
     this.name = name;
   }
 
-  public long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  public long getPhoneNo() {
+  public String getPhoneNo() {
     return phoneNo;
   }
 
-  public void setPhoneNo(long phoneNo) {
+  public void setPhoneNo(String phoneNo) {
     this.phoneNo = phoneNo;
   }
 
@@ -55,6 +56,18 @@ public class Employees {
 
   public void setSalary(long salary) {
     this.salary = salary;
+  }
+
+  public Hotel getHotel() {
+    return hotel;
+  }
+
+  public boolean isWorking() {
+    return working;
+  }
+
+  public void setWorking(boolean working){
+    this.working = working;
   }
 
   @Override

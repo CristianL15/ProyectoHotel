@@ -3,7 +3,7 @@ package Src;
 public class Maid extends Employees{
     private boolean available = true;
 
-    public Maid(String name, long id, long phoneNo, String location, double salary, boolean available, Hotel hotel) {
+    public Maid(String name, String id, String phoneNo, String location, double salary, boolean available, Hotel hotel) {
         super(name, id, phoneNo, location, salary, hotel);
         this.available = available;
     }

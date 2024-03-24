@@ -17,17 +17,26 @@ public class Lectura {
     }
 
     public int validateInt() {
+        int number = 0;
         if (input.hasNextInt()) {
-            int number = input.nextInt();
+            try {
+                number = input.nextInt();
+            } catch (Exception NumberFormatException) {
+                System.out.println("No es un número válido");
+            }
             if (number > 0) {
                 return number;
             } else {
-                System.out.println("El número debe ser positivo");
+                System.out.println("El número debe ser mayor que cero");
                 return 0;
             }
         } else {
             System.out.println("Debe ser un entero positivo.");
-            input.next();
+            try {
+                input.next();
+            } catch (NumberFormatException e){
+                System.out.println("Número no valido");
+            }
             return 0;
         }
     }
@@ -48,7 +57,7 @@ public class Lectura {
             if (number > 0) {
                 return number;
             } else {
-                System.out.println("El número debe ser positivo");
+                System.out.println("El número debe ser mayor que cero");
                 return 0;
             }
         } else {
@@ -74,7 +83,7 @@ public class Lectura {
             if (number > 0) {
                 return number;
             } else {
-                System.out.println("El número debe ser positivo");
+                System.out.println("El número debe ser mayor que cero");
                 return 0;
             }
         } else {
@@ -90,6 +99,7 @@ public class Lectura {
             System.out.print(mensaje+ ": ");
             number = validateLong();
         } while (number == 0);
+        input.nextLine();
         return number;
     }
 

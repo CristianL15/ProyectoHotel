@@ -3,7 +3,7 @@ package Src;
 public class Receptionist extends Employees{
   Hotel hotel;
 
-  public Receptionist(String name, long id, long phoneNo, String location, double salary, String role, Hotel hotel) {
+  public Receptionist(String name, String id, String phoneNo, String location, double salary, Hotel hotel) {
     super(name, id, phoneNo, location, salary, hotel);
     this.hotel = hotel;
   }

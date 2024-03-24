@@ -1,22 +1,24 @@
 package Src;
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Order {
     private Guest guest;
-    private Hashtable<String, Double> orders = new Hashtable<String, Double>();
-    private int id; 
+    private ArrayList<Object> orders = new ArrayList<>();
+    private int id;
+    static int count = 0;
 
-    public Order(int id, Guest guest) {
+    public Order(String service, Date FECHA, Guest guest) {
         this.guest = guest;
-        this.id = id;
+        this.id = ++count;
+    }
+    
+    public Order(String service, Date FECHA, Guest guest, ArrayList<Object> items) {
+        this.guest = guest;
+        this.id = ++count;
     }
 
-    public void addItem(String product, double price) {
-        orders.put(product, price);
-        guest.getBill().addItem(product, price);
-    }
-
-    public void removeItem(String product){
-        orders.remove(product);
+    public int getId() {
+        return id;
     }
 }

@@ -17,8 +17,13 @@ public class Menu {
     }
 
     public void showMenu() {
-        for (FoodItem foodItem : menu){
-            System.out.println(foodItem);
+        for (int i = 0; i < menu.size(); i++){
+            FoodItem foodItem = menu.get(i);
+            System.out.println("[" + (i + 1) + "] " + foodItem + " --- " + foodItem.getPrice());
         }
+    }
+
+    public ArrayList<FoodItem> getMenu() {
+        return menu;
     }
 }

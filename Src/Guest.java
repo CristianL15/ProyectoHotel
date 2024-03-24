@@ -1,34 +1,37 @@
 package Src;
-import java.util.Date;
+
+import java.util.ArrayList;
 
 public class Guest{
 	private String name;
 	private int edad;
-	private long id;
-	private long phoneNo;
-	private int roomId;
-	private Date entryDate;
+	private String id;
+	private String phoneNo;
+	private Room room;
+	// private entryDate; //BUSCAR ENTRADA DE FECHAS
 	private Order order;
 	private Bill bill = new Bill();
 	private Lectura input = new Lectura();
-	private Hotel hotel;
+	private Hotel hotel; 
 
 	public Guest(String name, int edad, Hotel hotel) {
-		this(name, edad, 0, 0);
+		this(name, edad, "", "");
 		this.hotel = hotel;
 	}
 
-	public Guest(String name, int edad, long id, long phoneNo){
+	public Guest(String name, int edad, String id, String phoneNo){
 		this.name = name;
 		this.edad = edad; 
 		this.id = id;
 		this.phoneNo = phoneNo;
 	}
 	
+	//HISTORIA DE USUARIO 3
 	public int checkOut(){
-		return this.roomId;
+		return this.edad;
 	}
 	
+	//HISTORIA DE USUARIO 3
 	public void payBill(){
 		bill.showBill();
 		double totalPrice = bill.getTotalPrice();
@@ -36,18 +39,26 @@ public class Guest{
 		System.out.println("Pagado");
 	}
 	
-	public void orderFood(){
-		hotel.getMenu().showMenu();
-		int id = input.repeatIntValidity("Ingrese el id de la comida que quiera");
-		hotel.getListOfOrders().add(new Order(id, this));
-	}
+	public void order(){
+		System.out.println("[1] Ordenar comida");
+		System.out.println("[2] Ordenar servicio de lavandería");
+		int service = 3;
+		while (service > 2) { 
+			service = input.repeatIntValidity("¿Qué servicio desea ordenar");
+		}
+		System.out.println();
 
-	public void orderMaid(){
-		
+		ArrayList<FoodItem> items = new ArrayList<>();
+		if (service == 1){
+		}
+		if (service == 2) {
+			//FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
+		}
 	}
 	
-	public String submitFeedback(){
-		return input.readString("");
+	public void complain(){
+		String complain = input.readString("Por favor ingrese su queja y siendo lo más amable posible");
+		hotel.getListOfComplains().add(complain);
 	}
 	
 	public String getName() {
@@ -58,28 +69,28 @@ public class Guest{
 		this.name = name;
 	}
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
-	public long getPhoneNo() {
+	public String getPhoneNo() {
 		return phoneNo;
 	}
 	
-	public void setPhoneNo(long phoneNo) {
+	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 	
-	public int getroomId() {
-		return roomId;
+	public Room getRoom() {
+		return room;
 	}
 	
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	public Bill getBill(){

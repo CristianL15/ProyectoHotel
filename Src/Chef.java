@@ -5,8 +5,8 @@ public class Chef extends Employees{
 	private int ordenNo;
 	private double priceOrder;
 	private double overPrice = 1;
-	
-	public Chef(String name, long id, long phoneNo, String location, double salary, Hotel hotel) {
+
+	public Chef(String name, String id, String phoneNo, String location, double salary, Hotel hotel) {
 		super(name, id, phoneNo, location, salary, hotel);
 	}
 
