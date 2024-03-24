@@ -38,6 +38,10 @@ public class Order {
         return id;
     }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
     public Room getRoom() {
         return room;
     }

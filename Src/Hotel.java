@@ -13,6 +13,7 @@ public class Hotel {
   private ArrayList<Guest> listOfAdultGuests = new ArrayList<>();
   private ArrayList<Guest> listOfAllGuests = new ArrayList<>();
   
+  private ArrayList<Maid> listOfBusyMaids = new ArrayList<>(); 
   private ArrayList<Employees> listOfEmployees = new ArrayList<>();
   private ArrayList<Chef> listOfChefs = new ArrayList<>();
   private ArrayList<Maid> listOfMaids = new ArrayList<>();
@@ -23,6 +24,7 @@ public class Hotel {
   private ArrayList<String> roomTypes = new ArrayList<>();
   private ArrayList<Room> listOfOccupiedRooms = new ArrayList<>();
   private ArrayList<Room> listOfFreeRooms = new ArrayList<>();
+  private ArrayList<Room> listOfDirtyRooms = new ArrayList<>();
 
   private ArrayList<Order> listOfFoodOrders = new ArrayList<>();
   private ArrayList<Order> listOfLaundryOrders = new ArrayList<>();
@@ -54,7 +56,7 @@ public class Hotel {
     } while (option > roomTypes.size());
 
     String type = roomTypes.get(option - 1);
-    int roomThisType = (int)listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type) && room.isClean()).count();
+    int roomThisType = (int)listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).count();
 
 
     if (roomThisType > 0){
@@ -66,7 +68,7 @@ public class Hotel {
   }
   
   private void registerGuest(String type){
-    Room roomBeingReserved = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type) && room.isClean()).findFirst().orElse(null);
+    Room roomBeingReserved = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).findFirst().orElse(null);
     int amountPeople = input.repeatIntValidity("Cuántas personas van a alojarse?");
     if (amountPeople > roomBeingReserved.getMaxOfPeople()) {
       System.out.println();
@@ -94,7 +96,7 @@ public class Hotel {
         edad = input.repeatIntValidity("Ingrese su edad");
       }
       
-      if (edad > 18) {
+      if (edad >= 18) {
         do {
           id = input.readLongString("Ingrese su cédula o número de identficación (sin espacios)");
           if (listOfId.contains(id)){
@@ -196,6 +198,10 @@ public class Hotel {
     return listOfMaids;
   }
 
+  public ArrayList<Maid> getListOfBusyMaids() {
+    return listOfBusyMaids;
+  }
+
   public ArrayList<Receptionist> getListOfReceptionists() {
     return listOfReceptionists;
   }
@@ -215,6 +221,10 @@ public class Hotel {
 
   public ArrayList<Room> getListOfFreeRooms() {
     return listOfFreeRooms;
+  }
+
+  public ArrayList<Room> getListOfDirtyRooms() {
+    return listOfDirtyRooms;
   }
 
   public ArrayList<String> getRoomTypes() {

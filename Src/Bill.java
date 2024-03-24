@@ -21,19 +21,19 @@ public class Bill {
     System.out.println("Cliente: " + guest.getName() + "          " + guest.getPhoneNo());
     System.out.println("-----------------------------------------------------------------");
     System.err.println();
-    System.out.println("Descripción                      Precio");
+    System.out.println("Descripción               Fecha                  Precio");
 
 
     for (int i = 0; i < orders.size(); i++) {
       Order order = orders.get(i);
       totalPrice += order.getTotalPrice();
-      System.out.println(order.getService() + "                      " + order.getTotalPrice());
+      System.out.println(order.getService() + "           " + order.getDateTime() + "        " + order.getTotalPrice());
     }
-    
+
     System.out.println();
-    System.out.println("Subtotal                         " + totalPrice);
-    System.out.println("Impuestos IVA (19%)              " + totalPrice * 0.19);
-    System.out.println("Total                            " + totalPrice * 1.19);
+    System.out.println("Subtotal                                        " + totalPrice);
+    System.out.println("Impuestos IVA (19%)                             " + totalPrice * 0.19);
+    System.out.println("Total                                           " + totalPrice * 1.19);
 
   }
 

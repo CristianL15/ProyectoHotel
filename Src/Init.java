@@ -80,7 +80,7 @@ public class Init {
 					hotel.getListOfReceptionists().add(recepcionist);
 					break;
 				case "mucama":
-					Maid maid = new Maid(employeeName, employeeId, employeePhoneNo, employeeLocation, employeeSalary, true, hotel);
+					Maid maid = new Maid(employeeName, employeeId, employeePhoneNo, employeeLocation, employeeSalary, hotel);
 					hotel.getListOfEmployees().add(maid);
 					hotel.getListOfMaids().add(maid);
 					break;
@@ -138,10 +138,10 @@ public class Init {
 		Chef chef4 = new Chef("Jean Picard", "328324984", "3891237491", "Francia", 4200000, hotel);
 		Chef chef5 = new Chef("Roux François", "234983243", "3428934289", "Francia", 4200000, hotel);
 
-		Maid maid1 = new Maid("Juan Andres Sevilla", "2349873249", "3289789324", "España", 2000000, false, hotel);
-		Maid maid2 = new Maid("Luciana Gutierrez", "5438721387", "8787878954", "Venezuela", 2000000, false, hotel);
-		Maid maid3 = new Maid("Valentina Tobón", "4578345439", "934587345873", "Colombia", 2000000, false, hotel);
-		Maid maid4 = new Maid("Teofilo Torres", "8754387234", "73425873248", "Peru", 2000000, false, hotel);
+		Maid maid1 = new Maid("Juan Andres Sevilla", "2349873249", "3289789324", "España", 2000000, hotel);
+		Maid maid2 = new Maid("Luciana Gutierrez", "5438721387", "8787878954", "Venezuela", 2000000, hotel);
+		Maid maid3 = new Maid("Valentina Tobón", "4578345439", "934587345873", "Colombia", 2000000, hotel);
+		Maid maid4 = new Maid("Teofilo Torres", "8754387234", "73425873248", "Peru", 2000000, hotel);
 
 		hotel.getListOfEmployees().add(manager);
 		hotel.getListOfEmployees().add(receptionist1);

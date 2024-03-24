@@ -9,7 +9,6 @@ public class Room {
   private String type;
   private int maxOfPeople;
   private ArrayList<Guest> guestsInRoom;
-  private boolean clean = true;
 
   public Room(double price, String type, int maxOfPeople) {
     this.id = count++;
@@ -54,17 +53,9 @@ public class Room {
     this.type = type;
   }
 
-  public boolean isClean() {
-    return clean;
-  }
-
-  public void setClean(boolean clean) {
-    this.clean = clean;
-  }
-
   @Override
   public String toString() {
-    return "Room [name=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + ", clean=" + clean + "]";
+    return "Room [name=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + "]";
   }
   
 }

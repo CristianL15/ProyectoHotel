@@ -1,6 +1,8 @@
 package Src;
 
 import java.util.ArrayList;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Update {
     private Lectura input = new Lectura();
@@ -12,6 +14,14 @@ public class Update {
     }
     
     public void start() {
+        for (int i = 0; i < hotel.getListOfBusyMaids().size(); i++) {
+            Maid maid = hotel.getListOfBusyMaids().get(i);
+            if (LocalDateTime.now().isAfter(maid.getBusyTime().plusMinutes(2))){
+                hotel.getListOfBusyMaids().remove(maid);
+                hotel.getListOfMaids().add(maid);
+            }
+        }
+
         System.out.println("\nLista de personas");
         System.out.println("[1] Empleados");
         System.out.println("[2] Clientes");

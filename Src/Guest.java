@@ -12,7 +12,6 @@ public class Guest{
 	private String phoneNo;
 	private Room room;
 	private String entryDate;
-	private Order order;
 	private Bill bill = new Bill();
 	private Lectura input = new Lectura();
 	private Hotel hotel; 
@@ -45,7 +44,7 @@ public class Guest{
 		order.setTotalPrice(room.getPrice() * nights);
 		bill.addToBill(order);
 		payBill();
-		room.setClean(false);
+		hotel.getListOfDirtyRooms().add(room);
 		room.setGuestsRoom(null);		
 	}
 	
