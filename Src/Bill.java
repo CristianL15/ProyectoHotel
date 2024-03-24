@@ -1,27 +1,44 @@
 package Src;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Bill {
-  private Hashtable<String, Double> bill = new Hashtable<String, Double>();
+  private int id = 0;
+  static int count = 0;
+  private ArrayList<Order> orders = new ArrayList<>();
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"); 
 
-  public void showBill() {
-    bill.forEach((product, price) -> System.out.println("Product: " + product + " --- price: " + price + "\n"));
+  public Bill() {
+    this.id = ++count;
   }
 
-  public double getTotalPrice() {
+  public void showBill(Guest guest) {
     double totalPrice = 0;
-    for (Map.Entry<String, Double> entry : bill.entrySet()) {
-      totalPrice += entry.getValue();
+    System.out.println("Factura");
+    System.out.println(guest.getHotel().getName() + "             " + guest.getHotel().getlocation());
+    System.out.println("Código de factura: " + id + "      " + dtf.format(LocalDateTime.now()));
+    System.out.println("Cliente: " + guest.getName() + "          " + guest.getPhoneNo());
+    System.out.println("-----------------------------------------------------------------");
+    System.err.println();
+    System.out.println("Descripción                      Precio");
+
+
+    for (int i = 0; i < orders.size(); i++) {
+      Order order = orders.get(i);
+      totalPrice += order.getTotalPrice();
+      System.out.println(order.getService() + "                      " + order.getTotalPrice());
     }
-    return totalPrice;
+    
+    System.out.println();
+    System.out.println("Subtotal                         " + totalPrice);
+    System.out.println("Impuestos IVA (19%)              " + totalPrice * 0.19);
+    System.out.println("Total                            " + totalPrice * 1.19);
+
   }
 
-  public void addItem(String product, double price) {
-    bill.put(product, price);
+  public void addToBill(Order order) {
+    orders.add(order);
   }
 
-  public void removeItem(String product){
-    bill.remove(product);
-  }
 }

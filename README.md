@@ -15,4 +15,9 @@ Nataly Lievano Arroyo
 - En la simulación, el usuario solo puede actuar como cliente que sea persona adulta
 - A los menores de edad no se les registra su número de identificación ni su número de celular
 - El hotel depende de los empleados --> No es un hotel autónomo en el que los propios clientes hacen su ingreso
-- Las recepcionistas son quienes hacen el check-in de los usuarios --> Suponiendo el caso real en el que es la recepcionista quien ingresa a un usuario.
+- Las recepcionistas son quienes hacen el check-in de los usuarios --> Suponiendo el caso real en el que es la recepcionistaquien ingresa a un usuario.
+- Solo hay un menú con todos los items
+- Todos los items están siempre disponibles
+- Los platos son generales --> Los chefs no tienen un platillo con su sello o que solo ese chef prepare
+- La orden de un servicio se añade a la factura después de ser realizadas por un empleado
+- Los precios se manejan con el peso colombiano

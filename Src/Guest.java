@@ -1,41 +1,58 @@
 package Src;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Guest{
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"); 
 	private String name;
 	private int edad;
 	private String id;
 	private String phoneNo;
 	private Room room;
-	// private entryDate; //BUSCAR ENTRADA DE FECHAS
+	private String entryDate;
 	private Order order;
 	private Bill bill = new Bill();
 	private Lectura input = new Lectura();
 	private Hotel hotel; 
+	private int nights; 
 
 	public Guest(String name, int edad, Hotel hotel) {
-		this(name, edad, "", "");
+		this(name, edad, "", "", hotel);
 		this.hotel = hotel;
+		entryDate = dtf.format(LocalDateTime.now());
 	}
 
-	public Guest(String name, int edad, String id, String phoneNo){
+	public Guest(String name, int edad, String id, String phoneNo, Hotel hotel){
 		this.name = name;
 		this.edad = edad; 
 		this.id = id;
 		this.phoneNo = phoneNo;
+		this.hotel = hotel;
+		entryDate = dtf.format(LocalDateTime.now());
 	}
 	
 	//HISTORIA DE USUARIO 3
-	public int checkOut(){
-		return this.edad;
+	public void checkOut(){
+		for (Guest guest : room.getGuestsInRoom()){
+			if (guest.getEdad() >= 18){
+				hotel.getListOfAdultGuests().remove(guest);
+			}
+			hotel.getListOfGuests().remove(guest);
+		}
+		Order order = new Order("habitación", dtf.format(LocalDateTime.now()), room);
+		order.setTotalPrice(room.getPrice() * nights);
+		bill.addToBill(order);
+		payBill();
+		room.setClean(false);
+		room.setGuestsRoom(null);		
 	}
 	
 	//HISTORIA DE USUARIO 3
 	public void payBill(){
-		bill.showBill();
-		double totalPrice = bill.getTotalPrice();
-		System.out.println("El valor a pagar es de: " + totalPrice);
+		Guest responsible = room.getGuestsInRoom().get(0);
+		bill.showBill(responsible);
 		System.out.println("Pagado");
 	}
 	
@@ -48,12 +65,42 @@ public class Guest{
 		}
 		System.out.println();
 
-		ArrayList<FoodItem> items = new ArrayList<>();
 		if (service == 1){
+			orderFood();
 		}
 		if (service == 2) {
-			//FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
+			orderLaundry();  //FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
 		}
+	}
+
+	public void orderFood() {
+		Menu menu = hotel.getMenu();
+		menu.showMenu();
+		ArrayList<FoodItem> itemsOrdered = new ArrayList<>();
+		System.out.println();
+		System.out.println("¿Qué desea ordenar?");
+		String keepOrdering = "si";
+		int totalPrice = 0;
+		while (!keepOrdering.equalsIgnoreCase("no")){
+			int itemOption = input.repeatIntValidity("Elija el número del item");
+			FoodItem foodItem = menu.getMenu().get(itemOption - 1);
+			int itemAmount = input.repeatIntValidity("Ingrese la cantidad a pedir de este platillo");
+			totalPrice += foodItem.getPrice() * itemAmount;
+			for (int i = 0; i < itemAmount; i++){
+				itemsOrdered.add(foodItem);
+			}
+			keepOrdering = input.readString("¿Desea ordenar algo más? si/no");
+		}
+		Order order = new Order("comida", dtf.format(LocalDateTime.now()), room, itemsOrdered);
+		order.setTotalPrice(totalPrice);
+		hotel.getListOfFoodOrders().add(order);
+	}
+
+	public void orderLaundry() {
+		//FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
+		Order order = new Order("lavandería", dtf.format(LocalDateTime.now()), room);
+		order.setTotalPrice(50000);
+		hotel.getListOfLaundryOrders().add(order);
 	}
 	
 	public void complain(){
@@ -67,6 +114,14 @@ public class Guest{
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad() {
+		this.edad = edad;
 	}
 	
 	public String getId() {
@@ -84,6 +139,14 @@ public class Guest{
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+
+	public int getNights() {
+		return nights;
+	}
+
+	public void setNights(int nights) {
+		this.nights = nights;
+	}
 	
 	public Room getRoom() {
 		return room;
@@ -95,6 +158,10 @@ public class Guest{
 
 	public Bill getBill(){
 		return bill;
+	}
+
+	public Hotel getHotel() {
+		return hotel;
 	}
 
 	@Override

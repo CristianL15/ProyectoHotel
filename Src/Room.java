@@ -7,13 +7,15 @@ public class Room {
   private int id;
   private double price;
   private String type;
+  private int maxOfPeople;
   private ArrayList<Guest> guestsInRoom;
   private boolean clean = true;
 
-  public Room(double price, String type) {
+  public Room(double price, String type, int maxOfPeople) {
     this.id = count++;
     this.price = price;
     this.type = type;
+    this.maxOfPeople = maxOfPeople;
   }
 
   public int getId() {
@@ -44,6 +46,10 @@ public class Room {
     return type;
   }
 
+  public int getMaxOfPeople() {
+    return maxOfPeople;
+  }
+
   public void setType(String type) {
     this.type = type;
   }
@@ -58,8 +64,7 @@ public class Room {
 
   @Override
   public String toString() {
-    return "Room [id=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + ", clean=" + clean + "]";
+    return "Room [name=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + ", clean=" + clean + "]";
   }
-
   
 }

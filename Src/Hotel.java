@@ -6,6 +6,7 @@ public class Hotel {
   private Lectura input = new Lectura();
   private String name;
   private String location;
+  private Menu menu;
   
   private ArrayList<String> listOfId = new ArrayList<>();
   private ArrayList<Guest> listOfGuests = new ArrayList<>();
@@ -17,7 +18,6 @@ public class Hotel {
   private ArrayList<Maid> listOfMaids = new ArrayList<>();
   private ArrayList<Receptionist> listOfReceptionists = new ArrayList<>();
   
-  private ArrayList<Menu> listOfMenus = new ArrayList<>();
   private ArrayList<String> listOfComplains = new ArrayList<>();
 
   private ArrayList<String> roomTypes = new ArrayList<>();
@@ -26,6 +26,7 @@ public class Hotel {
 
   private ArrayList<Order> listOfFoodOrders = new ArrayList<>();
   private ArrayList<Order> listOfLaundryOrders = new ArrayList<>();
+  private ArrayList<Bill> listOfBills = new ArrayList<>();
 
   public Hotel(String name, String location) {
     this.name = name;
@@ -40,11 +41,12 @@ public class Hotel {
       String type = roomTypes.get(i - 1);
 
       //CAMBIAR ACCESO A HABITACIONES DISPONIBLES
-      Stream<Room> roomThisType = listOfFreeRooms.stream().filter(room -> room.getType().equals(type));
-      double priceThisType = listOfFreeRooms.stream().filter(room -> room.getType().equals(type)).findFirst().get().getPrice();
+      Stream<Room> roomThisType = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type));
+      int maxOfPeople = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).findFirst().get().getMaxOfPeople();
+      double priceThisType = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).findFirst().get().getPrice();
 
       int roomsAvailables = (int)roomThisType.count();
-      System.out.println("[" + i + "] Habitación " + type + " --- $" + priceThisType + " --- " + roomsAvailables + " disponibles");
+      System.out.println("[" + i + "] Habitación " + type + " --- $" + priceThisType + " --- " + roomsAvailables + " disponibles --- Capacidad máxima de personas: " + maxOfPeople);
     }
 
     do {
@@ -52,7 +54,7 @@ public class Hotel {
     } while (option > roomTypes.size());
 
     String type = roomTypes.get(option - 1);
-    int roomThisType = (int)listOfFreeRooms.stream().filter(room -> room.getType().equals(type) && room.isClean()).count();
+    int roomThisType = (int)listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type) && room.isClean()).count();
 
 
     if (roomThisType > 0){
@@ -64,10 +66,18 @@ public class Hotel {
   }
   
   private void registerGuest(String type){
+    Room roomBeingReserved = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type) && room.isClean()).findFirst().orElse(null);
     int amountPeople = input.repeatIntValidity("Cuántas personas van a alojarse?");
+    if (amountPeople > roomBeingReserved.getMaxOfPeople()) {
+      System.out.println();
+      System.out.println("El tipo de habitación solo permite " + roomBeingReserved.getMaxOfPeople() + " de personas");
+      System.out.println("Elige de nuevo la habitción");
+      System.out.println();
+      selectRoomType();
+    }
+    int nights = input.repeatIntValidity("¿Cuántas noches se van a quedar?");
 		System.out.println("\nPor favor haga el diligenciamiento de registro para ingresar al hotel. " + (amountPeople > 1 ? "Ponga primero el nombre de la persona a quien se le va a facturar" : ""));
     ArrayList<Guest> guestsInRoom = new ArrayList<Guest>();
-    Room roomBeingReserved = listOfFreeRooms.stream().filter(room -> room.getType().equals(type) && room.isClean()).findFirst().orElse(null);
     
     for (int i = 0; i < amountPeople; i++){
       String name;
@@ -97,7 +107,8 @@ public class Hotel {
         phoneNo = "";
       }
 
-      Guest guest = new Guest(name, edad, id, phoneNo);
+      Guest guest = new Guest(name, edad, id, phoneNo, this);
+      guest.setNights(nights); 
       guest.setRoom(roomBeingReserved);
 
       listOfGuests.add(guest);
@@ -116,11 +127,11 @@ public class Hotel {
     roomBeingReserved.setGuestsRoom(guestsInRoom);
   }
 
-  public void checkOut(int id) {
-    Room roomGuestsLeaving = listOfOccupiedRooms.stream().filter(room -> room.getId() == id).findFirst().orElse(null);
+  //HISTORIA DE USUARIO 3
+  public void checkOut(int roomId) {
+    Room roomGuestsLeaving = listOfOccupiedRooms.stream().filter(room -> room.getId() == roomId).findFirst().orElse(null);
     Guest responsible = roomGuestsLeaving.getGuestsInRoom().get(0);
     Bill bill = responsible.getBill();
-    bill.showBill();
     responsible.payBill();
 
     /* 
@@ -147,6 +158,14 @@ public class Hotel {
 
   public String getlocation() {
     return location;
+  }
+
+  public Menu getMenu() {
+    return menu;
+  }
+
+  public void setMenu(Menu menu) {
+    this.menu = menu;
   }
 
   public void setlocation(String location) {
@@ -180,10 +199,6 @@ public class Hotel {
   public ArrayList<Receptionist> getListOfReceptionists() {
     return listOfReceptionists;
   }
-
-  public ArrayList<Menu> getListOfMenus(){
-    return listOfMenus;
-  }
   
   public ArrayList<String> getListOfComplains() {
     return listOfComplains;
@@ -209,13 +224,22 @@ public class Hotel {
   public ArrayList<Order> getListOfFoodOrders(){
     return listOfFoodOrders;
   }
+  
+  public ArrayList<Bill> getListOfBills() {
+    return listOfBills;
+  }
+
+
+  public ArrayList<Order> getListOfLaundryOrders() {
+    return listOfLaundryOrders;
+  }
 
   @Override
   public String toString() {
     return "Hotel [input= " + input + "\n name= " + name + "\n location= " + location + "\n listOfGuests= " + listOfGuests
         + "\n listOfAdultGuests= " + listOfAdultGuests + "\n listOfAllGuests= " + listOfAllGuests + "\n listOfEmployees= "
         + listOfEmployees + "\n listOfChefs= " + listOfChefs + "\n listOfMaids= " + listOfMaids + "\n listOfReceptionists= "
-        + listOfReceptionists + "\n listOfMenus= " + listOfMenus + "\n roomTypes= " + roomTypes + "\n listOfOccupiedRooms= "
+        + listOfReceptionists + "\n roomTypes= " + roomTypes + "\n Menu=" + menu + "\n listOfOccupiedRooms= "
         + listOfOccupiedRooms + "\n listOfFreeRooms= " + listOfFreeRooms + "\n listOfFoodOrders= " + listOfFoodOrders
         + "\n listOfLaundryOrders= " + listOfLaundryOrders + "]";
   }

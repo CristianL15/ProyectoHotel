@@ -14,7 +14,7 @@ public class Init {
 		System.out.println("¿Cómo desea inicializar los datos?");
 		System.out.println("[1] Hacerlo desde cero");
 		System.out.println("[2] Ya inicializados");
-		System.out.println("[3] Por archivo -------> OPCION NO VALIDA POR EL MOMENTO");  
+		System.out.println("[3] Por archivo -------> OPCION NO VALIDA POR EL MOMENTO");
 
 		do {
 			initOption = input.repeatIntValidity("Elige una opción (1 - 3)");
@@ -44,13 +44,14 @@ public class Init {
 		for (int i = 0; i < amountOfRoomTypes; i++){
 			String type = input.readString("Ingrese el tipo de la habitación (ej. sencilla, compartida, familiar)");
 			double price = input.repeatDoubleValidity("Ingrese el precio por día de este tipo de habitación");
+			int maxOfPeople = input.repeatIntValidity("Ingrese la cantidad máxima de personas permitidas en la habitación");
 
 			hotel.getRoomTypes().add(type);
 			int thisRoomType = input.repeatIntValidity("¿Cuántas habitaciones hay de este tipo?");
 			System.out.println();
 
 			for (int j = 0; j < thisRoomType; j++){
-				Room room = new Room(price, type);
+				Room room = new Room(price, type, maxOfPeople);
 				hotel.getListOfFreeRooms().add(room);
 			}
 		}
@@ -99,22 +100,22 @@ public class Init {
 
 		//INITIALIZE ROOMS IN HOTEL
 		for (int i = 0; i < 20; i++) {
-			Room room = new Room(75000, "sencilla");
+			Room room = new Room(75000, "sencilla", 1);
 			hotel.getListOfFreeRooms().add(room);
 		}
 		
 		for (int i = 0; i < 15; i++) {
-			Room room = new Room(110000, "compartida");
+			Room room = new Room(110000, "compartida", 2);
 			hotel.getListOfFreeRooms().add(room);
 		}
 		
 		for (int i = 0; i < 10; i++) {
-			Room room = new Room(140000, "familiar");
+			Room room = new Room(140000, "familiar", 6);
 			hotel.getListOfFreeRooms().add(room);
 		} 
 
 		for (int i = 0; i < 2; i++) {
-			Room room = new Room(200000, "suite");
+			Room room = new Room(200000, "suite", 10);
 			hotel.getListOfFreeRooms().add(room);
 		}
 
@@ -137,10 +138,10 @@ public class Init {
 		Chef chef4 = new Chef("Jean Picard", "328324984", "3891237491", "Francia", 4200000, hotel);
 		Chef chef5 = new Chef("Roux François", "234983243", "3428934289", "Francia", 4200000, hotel);
 
-		Maid maid1 = new Maid("Juan Andres Sevilla", null, null, null, 0, false, hotel);
-		Maid maid2 = new Maid("Luciana Gutierrez", null, null, null, 0, false, hotel);
-		Maid maid3 = new Maid("Valentina Tobón", null, null, null, 0, false, hotel);
-		Maid maid4 = new Maid("Teofilo Torres", null, null, null, 0, false, hotel);
+		Maid maid1 = new Maid("Juan Andres Sevilla", "2349873249", "3289789324", "España", 2000000, false, hotel);
+		Maid maid2 = new Maid("Luciana Gutierrez", "5438721387", "8787878954", "Venezuela", 2000000, false, hotel);
+		Maid maid3 = new Maid("Valentina Tobón", "4578345439", "934587345873", "Colombia", 2000000, false, hotel);
+		Maid maid4 = new Maid("Teofilo Torres", "8754387234", "73425873248", "Peru", 2000000, false, hotel);
 
 		hotel.getListOfEmployees().add(manager);
 		hotel.getListOfEmployees().add(receptionist1);
@@ -156,7 +157,6 @@ public class Init {
 		hotel.getListOfEmployees().add(maid2);
 		hotel.getListOfEmployees().add(maid3);
 		hotel.getListOfEmployees().add(maid4);
-
 		hotel.getListOfReceptionists().add(receptionist1);
 		hotel.getListOfReceptionists().add(receptionist2);
 		hotel.getListOfReceptionists().add(receptionist3);
@@ -171,44 +171,37 @@ public class Init {
 		hotel.getListOfMaids().add(maid3);
 		hotel.getListOfMaids().add(maid4);		
 
-		//INITIALIZE MENUS
-		Menu desayuno = new Menu();
-		Menu almuerzo = new Menu();
-		Menu cena = new Menu();
+		//INITIALIZE MENU
+		Menu menu = new Menu();
 
-		desayuno.addFoodItem(new FoodItem("Huevos con arepa", 101, 8000));
-		desayuno.addFoodItem(new FoodItem("Pancakes con frutos rojos", 102, 15000));
-		desayuno.addFoodItem(new FoodItem("Patacones con queso", 103, 12000));
-		desayuno.addFoodItem(new FoodItem("Quesadillas", 104, 18000));
-		desayuno.addFoodItem(new FoodItem("Sanduches de atún y queso", 105, 8000));
-		desayuno.addFoodItem(new FoodItem("Jugo de naranja", 106, 4000));
-		desayuno.addFoodItem(new FoodItem("Leche con chocolate", 107, 4000));
+		menu.addFoodItem(new FoodItem("Huevos con arepa", 8000));
+		menu.addFoodItem(new FoodItem("4 Pancakes con frutos rojos", 15000));
+		menu.addFoodItem(new FoodItem("5 Patacones con queso", 12000));
+		menu.addFoodItem(new FoodItem("Quesadillas", 18000));
+		menu.addFoodItem(new FoodItem("2 Sanduches de atún y queso", 8000));
+		menu.addFoodItem(new FoodItem("Jugo de naranja", 4000));
+		menu.addFoodItem(new FoodItem("Leche con chocolate", 4000));
+		menu.addFoodItem(new FoodItem("Bandeja paisa", 28000));
+		menu.addFoodItem(new FoodItem("Cazuela de mariscos", 24000));
+		menu.addFoodItem(new FoodItem("Cerdo al curry picante", 22000));
+		menu.addFoodItem(new FoodItem("Pescado blanco al Papillote", 30000));
+		menu.addFoodItem(new FoodItem("Rissotto di mare", 25000));
+		menu.addFoodItem(new FoodItem("Carbonada flamenca", 24000));
+		menu.addFoodItem(new FoodItem("Jugo natural", 4000));
+		menu.addFoodItem(new FoodItem("Spaghetti con albóndigas", 21000));
+		menu.addFoodItem(new FoodItem("Ensalada griega", 17000));
+		menu.addFoodItem(new FoodItem("Pizza de pepperoni mediana",25000));
+		menu.addFoodItem(new FoodItem("Hamburguesa de pollo", 18000));
+		menu.addFoodItem(new FoodItem("Crema de zanahoria con pan", 16000));
+		menu.addFoodItem(new FoodItem("4 Alitas de pollo", 12000));
+		menu.addFoodItem(new FoodItem("Limonada", 4000));
+		menu.addFoodItem(new FoodItem("Gaseosa", 4000));
 
-		almuerzo.addFoodItem(new FoodItem("Bandeja paisa", 201, 28000));
-		almuerzo.addFoodItem(new FoodItem("Cazuela de mariscos", 202, 24000));
-		almuerzo.addFoodItem(new FoodItem("Cerdo al curry picante", 203, 22000));
-		almuerzo.addFoodItem(new FoodItem("Pescado blanco al Papillote", 204, 30000));
-		almuerzo.addFoodItem(new FoodItem("Rissotto di mare", 205, 25000));
-		almuerzo.addFoodItem(new FoodItem("Carbonada flamenca", 206, 24000));
-		almuerzo.addFoodItem(new FoodItem("Jugo natural", 207, 4000));
-
-		cena.addFoodItem(new FoodItem("Spaghetti con albóndigas", 301, 21000));
-		cena.addFoodItem(new FoodItem("Ensalada griega", 302, 17000));
-		cena.addFoodItem(new FoodItem("Pizza de pepperoni ",303, 25000));
-		cena.addFoodItem(new FoodItem("Hamburguesa de pollo", 304, 18000));
-		cena.addFoodItem(new FoodItem("Crema de zanahoria con pan", 305, 16000));
-		cena.addFoodItem(new FoodItem("Alitas de pollo", 306, 12000));
-		cena.addFoodItem(new FoodItem("Limonada", 307, 4000));
-		cena.addFoodItem(new FoodItem("Gaseosa", 308, 4000));
-
-		hotel.getListOfMenus().add(desayuno);
-		hotel.getListOfMenus().add(almuerzo);
-		hotel.getListOfMenus().add(cena);
+		hotel.setMenu(menu);
 
 		return hotel;
 	}
 
-	
 	public Hotel initializeByFile() {
 		Hotel hotel = new Hotel(null, null);
 		return hotel;
