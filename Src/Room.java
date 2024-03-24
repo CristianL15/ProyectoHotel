@@ -55,7 +55,7 @@ public class Room {
 
   @Override
   public String toString() {
-    return "Room [name=" + id + ", price=" + price + ", type=" + type + ", guestsInRoom=" + guestsInRoom + "]";
+    return "Room " + id + ", price=" + price + ", type=" + type;
   }
   
 }

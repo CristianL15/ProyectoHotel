@@ -11,8 +11,6 @@ public class Maid extends Employees{
         this.hotel = hotel;
     }
     
-    //Implementar métodos de Maid (Llamado a limpieza de habitación, lavandería)
-
     public void doLaundry(){
         if (hotel.getListOfLaundryOrders().size() > 0) {
             Order order = hotel.getListOfLaundryOrders().get(0);

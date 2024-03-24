@@ -8,7 +8,7 @@ public class Hotel {
   private String location;
   private Menu menu;
   private Manager manager;
-  
+
   private ArrayList<String> listOfId = new ArrayList<>();
   private ArrayList<Guest> listOfGuests = new ArrayList<>();
   private ArrayList<Guest> listOfAdultGuests = new ArrayList<>();
@@ -43,7 +43,6 @@ public class Hotel {
     for (int i = 1; i < roomTypes.size() + 1; i++){
       String type = roomTypes.get(i - 1);
 
-      //CAMBIAR ACCESO A HABITACIONES DISPONIBLES
       Stream<Room> roomThisType = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type));
       int maxOfPeople = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).findFirst().get().getMaxOfPeople();
       double priceThisType = listOfFreeRooms.stream().filter(room -> room.getType().equalsIgnoreCase(type)).findFirst().get().getPrice();
@@ -130,8 +129,6 @@ public class Hotel {
     roomBeingReserved.setGuestsRoom(guestsInRoom);
   }
 
-
-
   public String getName() {
     return name;
   }
@@ -154,6 +151,15 @@ public class Hotel {
 
   public void setlocation(String location) {
     this.location = location;
+  }
+
+    
+  public Manager getManager() {
+    return manager;
+  }
+
+  public void setManager(Manager manager) {
+    this.manager = manager;
   }
 
   public ArrayList<Employees> getListOfEmployees() {

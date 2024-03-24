@@ -78,30 +78,25 @@ public class Update {
         }
     }
     
-    //HISTORIA DE USUARIO 6
     public void playManager() {
+        Manager manager = hotel.getManager();
         System.out.println("Como administrador de este hotel, puedes realizar las siguiente funciones:");
-        System.out.println("[1] Programar turno de los empleados");
-        System.out.println("[2] Despedir");
-        System.out.println("[3] Contratar");
-        System.out.println("[4] Menú anterior");
+        System.out.println("[1] Despedir");
+        System.out.println("[2] Contratar");
+        System.out.println("[3] Menú anterior");
 
         do {
-            option = input.repeatIntValidity("Ingrese una opcion (1 - 4)");
-        } while(option > 4);
+            option = input.repeatIntValidity("Ingrese una opcion (1 - 3)");
+        } while(option > 3);
         System.out.println();
 
-
-
         if (option == 1){
+            manager.hire();
             start();
         } if (option == 2) {
+            manager.fire();
             start();
         } if (option == 3) {
-            start();
-        } if (option == 4) {
-            start();
-        } else {
             start();
         }
     }
@@ -183,10 +178,21 @@ public class Update {
 
         else {
             Maid maid = maids.get(option - 1);
-        
+            String laundryOrders = "[";
+            for (int i = 0; i < hotel.getListOfLaundryOrders().size(); i++){
+                laundryOrders += "Order " + hotel.getListOfLaundryOrders().get(i).getId() + ", ";
+            }
+            laundryOrders += "]";
+
+            String dirtyRooms = "[";
+            for (int i = 0; i < hotel.getListOfDirtyRooms().size(); i++){
+                laundryOrders += "Habitación " + hotel.getListOfDirtyRooms().get(i).getId() + ", ";
+            }
+            dirtyRooms += "]";
+
             System.out.println("Como mucama de este hotel, puedes realizar las siguiente funciones:");
-            System.out.println("[1] Realizar servicio de lavandería");
-            System.out.println("[2] Limpiar habitación"); 
+            System.out.println("[1] Realizar servicio de lavandería  ----- " + laundryOrders);
+            System.out.println("[2] Limpiar habitación ----- " + dirtyRooms); 
             System.out.println("[3] Menú anterior");
             do {
                 option = input.repeatIntValidity("Ingrese una opcion (1 - 3)");
@@ -218,7 +224,7 @@ public class Update {
         int numberOfChefs = chefs.size();
         for (int i = 1; i < numberOfChefs + 1; i++){
             Chef chef = chefs.get(i - 1);
-            System.out.println("[" + i + "] " + chef.getName() + " --- id: " + chef.getId());
+            System.out.println("[" + i + "] " + chef.getName() + " --- id: " + chef.getId() + " --- " + chef.getLocation());
         }
         System.out.println("[" + (numberOfChefs + 1) + "] Menú anterior");
         do {
@@ -232,9 +238,13 @@ public class Update {
 
         else {
             Chef chef = chefs.get(option - 1);
-        
+            String foodOrders = "[";
+            for (int i = 0; i < hotel.getListOfFoodOrders().size(); i++){
+                foodOrders += "Order " + hotel.getListOfFoodOrders().get(i).getId() + ", ";
+            }
+            foodOrders += "]";
             System.out.println("Como chef de este hotel, puedes realizar las siguiente funciones:");
-            System.out.println("[1] Recibir orden");
+            System.out.println("[1] Recibir orden ----- " + foodOrders);
             System.out.println("[2] Menú anterior"); 
             do {
                 option = input.repeatIntValidity("Ingrese una opcion (1 - 2)");
@@ -248,8 +258,6 @@ public class Update {
                 playEmployees();
             }
         }
-
-        // RECIBIR ORDEN DE COMIDA
     }
 
     public void playGuests() {

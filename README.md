@@ -27,3 +27,5 @@ Bienvenido al repositorio del backend de la Simulación de un Hotel. Esta simula
 > - Todas las habitaciones están bien equipadas de inventario (toallas, sábanas, almohadas, papel higiénico, baño)
 > - Solo las mucamas se ocupan al realizar una tarea (limpiar habitación) por tiempo --> Hay que esperar 2 minutos para que se desocupen y volver a elegir a esa persona
 > - En el check-out se espera que el cliente sea un honesto, integro y un formado ser humano que reconozca sus acciones en contra de la propiedad privada, si robó o generó daños durante su estadía.
+> - Cuando ocurren robos o daños, se aplica un porcentaje al precio total del precio de la habitación por la cantidad de noches
+> - Las recepcionistas solo generarán facturas de todos aquellos clientes que ya hayan abandonado el hotel

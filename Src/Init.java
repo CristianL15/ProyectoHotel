@@ -57,6 +57,15 @@ public class Init {
 		}
         
 		//INITIALIZE EMPLOYEES
+		System.out.println("Ingrese los datos del administrador del hotel");
+		String managerName = input.readLongString("¿Cuál es su nombre?");
+		String managerId = input.readString("¿Cuál es su Id de empleado?");
+		String managerPhoneNo = input.readString("¿Cuál es su número de celular");
+		String managerLocation = input.readLongString("¿Cuál es su país natal?");
+		double managerSalary = input.repeatDoubleValidity("¿Cuál es su salario mensual?");
+
+		Manager manager = new Manager(managerName, managerId, managerPhoneNo, managerLocation, managerSalary, hotel);
+		hotel.setManager(manager);
 		int numberOfEmployees = input.repeatIntValidity("¿Cuántos empleados tiene?");
 		ArrayList<String> roles = new ArrayList<>(Arrays.asList("recepcionista", "mucama", "chef"));
 
@@ -143,6 +152,7 @@ public class Init {
 		Maid maid3 = new Maid("Valentina Tobón", "4578345439", "934587345873", "Colombia", 2000000, hotel);
 		Maid maid4 = new Maid("Teofilo Torres", "8754387234", "73425873248", "Peru", 2000000, hotel);
 
+		hotel.setManager(manager);
 		hotel.getListOfEmployees().add(manager);
 		hotel.getListOfEmployees().add(receptionist1);
 		hotel.getListOfEmployees().add(receptionist2);

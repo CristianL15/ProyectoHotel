@@ -14,8 +14,8 @@ public class Guest{
 	private String entryDate;
 	private Bill bill = new Bill();
 	private Lectura input = new Lectura();
-	private Hotel hotel; 
-	private int nights; 
+	private Hotel hotel;
+	private int nights;
 
 	public Guest(String name, int edad, Hotel hotel) {
 		this(name, edad, "", "", hotel);
@@ -40,32 +40,35 @@ public class Guest{
 			hotel.getListOfGuests().remove(guest);
 		}
 		String exitDate = dtf.format(LocalDateTime.now().plusDays(nights));
+		Guest responsible = room.getGuestsInRoom().get(0);
+		Bill responsibleBill = responsible.getBill();
 
-		String damage = input.readString("¿Hubo daños en la habitación? si/no");
-		String theft = input.readString("¿Hubo robos en la habitación? si/no");
+		String damage = input.readLongString("¿Hubo daños en la habitación? si/no");
 		if (damage.equalsIgnoreCase("si")) {
 			Order damageOrder = new Order("damage", exitDate, room);
-			damageOrder.setTotalPrice(room.getPrice() * nights * 0.40);
-			bill.addToBill(damageOrder);
+			damageOrder.setTotalPrice(room.getPrice() * nights * 0.80);
+			responsibleBill.addToBill(damageOrder);
 		}
-		
+
+		String theft = input.readLongString("¿Hubo robos en la habitación? si/no");
 		if (theft.equalsIgnoreCase("si")){
 			Order theftOrder = new Order("robos", exitDate, room);
-			theftOrder.setTotalPrice(room.getPrice() * nights * 0.5);
-			bill.addToBill(theftOrder);
+			theftOrder.setTotalPrice(room.getPrice() * nights * 0.6);
+			responsibleBill.addToBill(theftOrder);
 		}
 		
 		Order roomOrder = new Order("habitación", exitDate, room);
 		roomOrder.setTotalPrice(room.getPrice() * nights);
-		bill.addToBill(roomOrder);
-		payBill();
+		responsibleBill.addToBill(roomOrder);
+		responsibleBill.setResponsibleGuest(responsible);
+		payBill(responsibleBill);
+		hotel.getListOfBills().add(responsibleBill);
 		hotel.getListOfDirtyRooms().add(room);
-		room.setGuestsRoom(null);		
+		room.setGuestsRoom(null);
 	}
 	
-	public void payBill(){
-		Guest responsible = room.getGuestsInRoom().get(0);
-		bill.showBill(responsible);
+	public void payBill(Bill responsibleBill){
+		responsibleBill.showBill();
 		System.out.println("Pagado");
 	}
 	

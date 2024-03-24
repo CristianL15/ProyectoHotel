@@ -7,7 +7,12 @@ public class Manager extends Employees {
 
         this.hotel = hotel;
     }
-
-    //Implementar funcionalidad para manager (manejo de inventario)
     
+    public void hire() {
+
+    }
+
+    public void fire() {
+        
+    }
 }
