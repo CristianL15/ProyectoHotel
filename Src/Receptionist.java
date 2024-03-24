@@ -21,7 +21,7 @@ public class Receptionist extends Employees{
 
   //HISTORIA DE USUARIO 5
   public void generateDailyBalance(){
-
+    
   }
   
   public void acceptCustomerFeedback(){

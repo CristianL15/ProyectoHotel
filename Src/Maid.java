@@ -30,9 +30,6 @@ public class Maid extends Employees{
             hotel.getListOfBusyMaids().add(this);
             hotel.getListOfMaids().remove(this);
         }
-        
-        //HISTORIA DE USUARIO 7
-        // RESTAR DATOS DE TIEMPO 
     }
 
     public LocalDateTime getBusyTime() {

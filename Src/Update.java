@@ -91,10 +91,9 @@ public class Update {
         } while(option > 4);
         System.out.println();
 
-        
+
 
         if (option == 1){
-            manager.programDuties();
             start();
         } if (option == 2) {
             start();
@@ -137,7 +136,7 @@ public class Update {
     
             System.out.println("Como recepcionista de este hotel, puedes realizar las siguiente funciones:");
             System.out.println("[1] Check-In a clientes");
-            System.out.println("[2] Generar el balance diario"); //FALTA AGREGAR METODO  HISTORIA DE USUARIO 5
+            System.out.println("[2] Generar el balance diario");
             System.out.println("[3] Menú anterior");
             do {
                 option = input.repeatIntValidity("Ingrese una opcion (1 - 3)");
@@ -157,7 +156,6 @@ public class Update {
         
     }
 
-    //HISTORIA DE USUARIO 7
     public void playMaids() {
         System.out.println("\nElige la persona");
         ArrayList<Maid> allMaids = hotel.getListOfMaids();

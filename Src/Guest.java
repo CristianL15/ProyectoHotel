@@ -32,7 +32,6 @@ public class Guest{
 		entryDate = dtf.format(LocalDateTime.now());
 	}
 	
-	//HISTORIA DE USUARIO 3
 	public void checkOut(){
 		for (Guest guest : room.getGuestsInRoom()){
 			if (guest.getEdad() >= 18){
@@ -64,7 +63,6 @@ public class Guest{
 		room.setGuestsRoom(null);		
 	}
 	
-	//HISTORIA DE USUARIO 3
 	public void payBill(){
 		Guest responsible = room.getGuestsInRoom().get(0);
 		bill.showBill(responsible);
