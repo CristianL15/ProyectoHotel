@@ -7,6 +7,7 @@ public class Hotel {
   private String name;
   private String location;
   private Menu menu;
+  private Manager manager;
   
   private ArrayList<String> listOfId = new ArrayList<>();
   private ArrayList<Guest> listOfGuests = new ArrayList<>();
@@ -129,26 +130,7 @@ public class Hotel {
     roomBeingReserved.setGuestsRoom(guestsInRoom);
   }
 
-  //HISTORIA DE USUARIO 3
-  public void checkOut(int roomId) {
-    Room roomGuestsLeaving = listOfOccupiedRooms.stream().filter(room -> room.getId() == roomId).findFirst().orElse(null);
-    Guest responsible = roomGuestsLeaving.getGuestsInRoom().get(0);
-    Bill bill = responsible.getBill();
-    responsible.payBill();
 
-    /* 
-     * Supongamos que nos dan el Id de la habitación
-     * 
-     * Acceder a la lista en guestsInRoom()
-     * Acceder al primer Guest de guestsInRoom()
-     * Buscar y mostrar Bill del primer guest
-     * Hacer pagar el bill al primer Guest
-     * Agregar Room a listOfFreeRooms
-     * Remover lista de guestsInRoom
-     * Remover Guests de listOfGuests
-     */
-    
-  }
 
   public String getName() {
     return name;

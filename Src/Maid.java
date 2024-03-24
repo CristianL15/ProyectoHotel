@@ -25,9 +25,7 @@ public class Maid extends Employees{
     }
 
     public void cleanRoom() {
-        if (hotel.getListOfDirtyRooms().size() > 0){
-            Room room = hotel.getListOfDirtyRooms().get(0);
-            hotel.getListOfFreeRooms().add(room);
+        if (hotel.getListOfDirtyRooms().size() > 0 && hotel.getListOfDirtyRooms().size() > hotel.getListOfBusyMaids().size()){
             busyTime = LocalDateTime.now();
             hotel.getListOfBusyMaids().add(this);
             hotel.getListOfMaids().remove(this);

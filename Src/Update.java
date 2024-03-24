@@ -17,8 +17,12 @@ public class Update {
         for (int i = 0; i < hotel.getListOfBusyMaids().size(); i++) {
             Maid maid = hotel.getListOfBusyMaids().get(i);
             if (LocalDateTime.now().isAfter(maid.getBusyTime().plusMinutes(2))){
+                Room room = hotel.getListOfDirtyRooms().get(0);
+                hotel.getListOfFreeRooms().add(room);
                 hotel.getListOfBusyMaids().remove(maid);
                 hotel.getListOfMaids().add(maid);
+                hotel.getListOfDirtyRooms().get(0);
+                System.out.println(maid + "Limpio con éxito la habitación " + room.getId());
             }
         }
 
@@ -77,19 +81,20 @@ public class Update {
     //HISTORIA DE USUARIO 6
     public void playManager() {
         System.out.println("Como administrador de este hotel, puedes realizar las siguiente funciones:");
-        System.out.println("[1] Comprar inventario");
-        System.out.println("[2] Programar turno de los empleados");
-        System.out.println("[3] Despedir");
-        System.out.println("[4] Contratar");
-        System.out.println("[5] Menú anterior");
+        System.out.println("[1] Programar turno de los empleados");
+        System.out.println("[2] Despedir");
+        System.out.println("[3] Contratar");
+        System.out.println("[4] Menú anterior");
 
         do {
-            option = input.repeatIntValidity("Ingrese una opcion (1 - 5)");
-        } while(option > 5);
+            option = input.repeatIntValidity("Ingrese una opcion (1 - 4)");
+        } while(option > 4);
         System.out.println();
 
+        
+
         if (option == 1){
-            hotel.toString();
+            manager.programDuties();
             start();
         } if (option == 2) {
             start();

@@ -40,9 +40,25 @@ public class Guest{
 			}
 			hotel.getListOfGuests().remove(guest);
 		}
-		Order order = new Order("habitación", dtf.format(LocalDateTime.now()), room);
-		order.setTotalPrice(room.getPrice() * nights);
-		bill.addToBill(order);
+		String exitDate = dtf.format(LocalDateTime.now().plusDays(nights));
+
+		String damage = input.readString("¿Hubo daños en la habitación? si/no");
+		String theft = input.readString("¿Hubo robos en la habitación? si/no");
+		if (damage.equalsIgnoreCase("si")) {
+			Order damageOrder = new Order("damage", exitDate, room);
+			damageOrder.setTotalPrice(room.getPrice() * nights * 0.40);
+			bill.addToBill(damageOrder);
+		}
+		
+		if (theft.equalsIgnoreCase("si")){
+			Order theftOrder = new Order("robos", exitDate, room);
+			theftOrder.setTotalPrice(room.getPrice() * nights * 0.5);
+			bill.addToBill(theftOrder);
+		}
+		
+		Order roomOrder = new Order("habitación", exitDate, room);
+		roomOrder.setTotalPrice(room.getPrice() * nights);
+		bill.addToBill(roomOrder);
 		payBill();
 		hotel.getListOfDirtyRooms().add(room);
 		room.setGuestsRoom(null);		
@@ -68,7 +84,7 @@ public class Guest{
 			orderFood();
 		}
 		if (service == 2) {
-			orderLaundry();  //FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
+			orderLaundry();  
 		}
 	}
 
@@ -96,7 +112,6 @@ public class Guest{
 	}
 
 	public void orderLaundry() {
-		//FALTA CÓDIGO PARA SERVICIO DE LAVANDERÍA
 		Order order = new Order("lavandería", dtf.format(LocalDateTime.now()), room);
 		order.setTotalPrice(50000);
 		hotel.getListOfLaundryOrders().add(order);
